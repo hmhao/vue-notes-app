@@ -2,6 +2,7 @@
 const mutations = {
   ADD_NOTE (state) { // 添加笔记到列表里
     const newNote = { // 新建一个对象并初始化属性
+      title: 'New Caption',
       text: 'New Note',
       favorite: false
     }
@@ -9,7 +10,11 @@ const mutations = {
     state.activeNote = newNote // 把新建的这条笔记设为当前笔记
   },
 
-  EDIT_NOTE (state, text) { // 编辑当前笔记
+  EDIT_TITLE (state, text) { // 编辑当前笔记标题
+    state.activeNote.title = text
+  },
+
+  EDIT_NOTE (state, text) { // 编辑当前笔记内容
     state.activeNote.text = text
   },
 

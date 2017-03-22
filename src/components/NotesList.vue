@@ -2,14 +2,14 @@
   <div id="notes-list">
 
     <div id="list-header">
-      <h2>Notes</h2>
+      <h2>笔记</h2>
       <div class="btn-group btn-group-justified" role="group">
         <!-- All Notes button -->
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default"
             @click="show = 'all'"
             :class="{active: show === 'all'}">
-            All Notes
+            全部
           </button>
         </div>
         <!-- Favorites Button -->
@@ -17,7 +17,7 @@
           <button type="button" class="btn btn-default"
             @click="show = 'favorites'"
             :class="{active: show === 'favorites'}">
-            Favorites
+            标星
           </button>
         </div>
       </div>
@@ -30,7 +30,7 @@
           :class="{active: activeNote === note}"
           @click="updateActiveNote(note)">
           <h4 class="list-group-item-heading">
-            {{note.text.trim().substring(0, 30)}}
+            {{note.title | truncate}}
           </h4>
         </a>
       </div>
@@ -59,10 +59,16 @@ export default {
     }
   },
   // 映射 this.updateActiveNote() 为 this.$store.dispatch('SET_ACTIVE_NOTE')
-  methods: mapActions(['updateActiveNote'])
+  methods: mapActions(['updateActiveNote']),
+  // 自定义过滤器
+  filters: {
+    truncate: function (value, maxlen = 20) {
+      let v = value.trim()
+      if (v.length > maxlen) {
+        v = v.substring(0, maxlen) + '...'
+      }
+      return v
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>

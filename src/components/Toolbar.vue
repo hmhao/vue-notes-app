@@ -1,5 +1,6 @@
 <template>
   <div id="toolbar">
+    <i class="logoicon"><img src="/static/img/logo.png"></i>
     <i @click="addNote" class="glyphicon glyphicon-plus"></i>
     <i @click="toggleFavorite"
       class="glyphicon glyphicon-star"
@@ -16,7 +17,3 @@ export default {
   methods: mapActions(['addNote', 'deleteNote', 'toggleFavorite'])
 }
 </script>
-
-<style >
-
-</style>

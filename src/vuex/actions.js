@@ -2,6 +2,9 @@
 // 它们接收 store 作为第一个参数，这里是es6的析构
 const actions = {
   addNote: ({ commit }) => commit('ADD_NOTE'),
+  editTitle: ({ commit }, e) => {
+    commit('EDIT_TITLE', e.target.value)
+  },
   editNote: ({ commit }, e) => {
     commit('EDIT_NOTE', e.target.value)
   },

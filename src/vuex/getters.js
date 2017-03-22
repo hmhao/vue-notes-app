@@ -2,6 +2,7 @@
 const getters = {
   notes: state => state.notes,
   activeNote: state => state.activeNote,
+  activeNoteTitle: state => state.activeNote.title,
   activeNoteText: state => state.activeNote.text
 }
 

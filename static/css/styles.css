@@ -64,10 +64,29 @@ body {
   margin-left: 380px;
 }
 
+#note-editor .input-title {
+    border: 0;
+    border-radius: 0;
+}
+
 #note-editor textarea {
   height: 100%;
   border: 0;
   border-radius: 0;
+}
+
+#note-editor .notes-html {
+    display: inline-block;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 20px;
+    width: 50%;
+    float: left;
+    height: calc(100% - 34px);
+    max-height: calc(100% - 34px);
+    overflow-y: scroll;
 }
 
 #toolbar i {
@@ -84,4 +103,16 @@ body {
 
 .starred {
   color: #F7AE4F;
+}
+
+.logoicon {
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  margin-left: -14px;
+}
+.logoicon img {
+  width: 48px;
+  height: 48px;
+  margin: 10px 0 0 4px;
 }

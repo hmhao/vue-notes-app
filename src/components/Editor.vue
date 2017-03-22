@@ -1,10 +1,15 @@
 <template>
   <div id="note-editor">
+    <input 
+      :value="activeNoteTitle"
+      @input="editTitle"
+      type="text" class="form-control input-title">
     <textarea
       :value="activeNoteText"
       @input="editNote"
       class="form-control">
     </textarea>
+    <div class="notes-html"></div>
   </div>
 </template>
 
@@ -12,12 +17,8 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  computed: mapGetters(['activeNoteText']),
+  computed: mapGetters(['activeNoteTitle', 'activeNoteText']),
   // 映射 this.editNote() 为 this.$store.dispatch('EDIT_NOTE')
-  methods: mapActions(['editNote'])
+  methods: mapActions(['editTitle', 'editNote'])
 }
 </script>
-
-<style>
-
-</style>
