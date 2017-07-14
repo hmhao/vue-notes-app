@@ -1,5 +1,9 @@
+import marked from 'marked'
+import Cache from './cache'
+
+const cache = new Cache()
 let AUTO_SAVE_TIMER = 0
-let cache = {}
+let MARKED_RENDER_TIMER = 0
 
 // 状态事件的回调函数
 const mutations = {
@@ -30,16 +34,22 @@ const mutations = {
 
   EDIT_NOTE (state, text) { // 编辑当前笔记内容
     state.activeNote.text = text
+    clearTimeout(MARKED_RENDER_TIMER)
+    MARKED_RENDER_TIMER = setTimeout(mutations.RENDER_NOTE, 500, state)
   },
 
-  SAVE_NOTE (state) {
+  RENDER_NOTE (state) { // 渲染笔记
+    state.renderHtml = marked(state.activeNote.text)
+  },
+
+  SAVE_NOTE (state) { // 保存当前笔记
     clearTimeout(AUTO_SAVE_TIMER)
     let autoSave = state.$lfConfig.autoSave
     let note = state.activeNote
-    if (note.id && cache[note.id] !== note.text) { // 当前编辑笔记及笔记内容发生改变时
+    if (note.id && cache.haveChange(note)) { // 当前编辑笔记及笔记内容发生改变时
       state.$lf.setItem(note.id, note).then(function (value) {
         console.log('SAVE_NOTE')
-        cache[value.id] = value.text
+        cache.set(note)
       }).catch(function (err) {
         console.log(err)
       }).then(function () {
@@ -54,7 +64,7 @@ const mutations = {
     }
   },
 
-  LOAD_NOTES (state) {
+  LOAD_NOTES (state) { // 加载所有笔记
     let $lf = state.$lf
     let $lfConfig = state.$lfConfig
     $lf.iterate(function (value, key, iterationNumber) {
@@ -82,12 +92,14 @@ const mutations = {
 
   TOGGLE_FAVORITE (state) { // 收藏/取消收藏当前笔记
     state.activeNote.favorite = !state.activeNote.favorite
+    mutations.SAVE_NOTE(state)
   },
 
   SET_ACTIVE_NOTE (state, note) { // 把选中的笔记设置为「当前笔记」
     mutations.SAVE_NOTE(state) // 先保存后切换
-    cache[note.id] = note.text // 缓存当前编辑的笔记内容
+    cache.set(note) // 缓存当前编辑的笔记
     state.activeNote = note
+    mutations.RENDER_NOTE(state) // 然后渲染
   }
 }
 

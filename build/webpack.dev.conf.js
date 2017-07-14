@@ -1,3 +1,4 @@
+var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
@@ -29,6 +30,20 @@ module.exports = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'index.html',
       inject: true
+    }),
+    // split vendor js into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module, count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, '../node_modules')
+          ) === 0
+        )
+      }
     }),
     new FriendlyErrorsPlugin()
   ]

@@ -98,27 +98,25 @@ body {
   border-radius: 0;
 }
 
-#note-editor textarea {
-  height: 100%;
+#note-editor .note-raw-text {
   border: 0;
   border-radius: 0;
-}
-
-#note-html {
-  display: inline-block;
-  vertical-align: top;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0 20px;
-  width: 50%;
   float: left;
-  height: calc(100% - 34px);
-  max-height: calc(100% - 34px);
-  overflow-y: scroll;
+  width: 48%;
+  height: 95%;
 }
 
-#note-blank-mask {
+#note-editor .note-render-html {
+  border-top: 1px solid #eee;
+  border-left: 4px solid #eee;
+  padding-left: 12px;
+  float: left;
+  width: 52%;
+  height: 95%;
+  overflow: scroll;
+}
+
+#note-editor .note-blank-mask {
   position: absolute;
   top: 0;
   width: 100%;

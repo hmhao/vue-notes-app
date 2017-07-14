@@ -4,7 +4,8 @@ const getters = {
   activeNote: state => state.activeNote,
   activeNoteID: state => state.activeNote.id,
   activeNoteTitle: state => state.activeNote.title,
-  activeNoteText: state => state.activeNote.text
+  activeNoteText: state => state.activeNote.text,
+  activeNoteRender: state => state.renderHtml
 }
 
 export default getters

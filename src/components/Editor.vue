@@ -11,9 +11,10 @@
       @blur="saveNote"
       @keydown.ctrl.83.prevent.stop=""
       @keyup.ctrl.83.prevent.stop="saveNote"
-      class="form-control">
+      class="form-control note-raw-text">
     </textarea>
-    <div id="note-blank-mask" v-if="!activeNoteID"></div>
+    <div class="note-render-html" v-html="activeNoteRender"></div>
+    <div class="note-blank-mask" v-if="!activeNoteID"></div>
   </div>
 </template>
 
@@ -21,7 +22,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  computed: mapGetters(['activeNoteID', 'activeNoteTitle', 'activeNoteText']),
+  computed: mapGetters(['activeNoteID', 'activeNoteTitle', 'activeNoteText', 'activeNoteRender']),
   // 映射 this.editNote() 为 this.$store.dispatch('EDIT_NOTE')
   methods: mapActions(['editTitle', 'editNote', 'saveNote'])
 }
