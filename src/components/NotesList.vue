@@ -1,23 +1,14 @@
 <template>
   <div id="notes-list">
-
     <div id="list-header">
       <h2>笔记</h2>
       <div class="btn-group btn-group-justified" role="group">
-        <!-- All Notes button -->
-        <div class="btn-group" role="group">
+        <div class="btn-group" role="group"
+          v-for="type in types">
           <button type="button" class="btn btn-default"
-            @click="show = 'all'"
-            :class="{active: show === 'all'}">
-            全部
-          </button>
-        </div>
-        <!-- Favorites Button -->
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default"
-            @click="show = 'favorites'"
-            :class="{active: show === 'favorites'}">
-            标星
+            @click="show = type.key"
+            :class="{active: show === type.key}">
+            {{type.label}}
           </button>
         </div>
       </div>
@@ -35,7 +26,6 @@
         </a>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -45,7 +35,14 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      show: 'all'
+      show: 'all',
+      types: [{
+        label: '全部',
+        key: 'all' // All Notes button
+      }, {
+        label: '标星',
+        key: 'favorites' // Favorites Button
+      }]
     }
   },
   computed: {

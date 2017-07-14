@@ -10,6 +10,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "localforage": "^1.5.0",
     "vue": "^2.2.4",
     "vuex": "^2.2.1"
   },
@@ -59,7 +60,7 @@
   },
   "engines": {
     "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "npm": ">= 2.0.0"
   },
   "browserslist": [
     "> 1%",

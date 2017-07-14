@@ -8,6 +8,9 @@ const actions = {
   editNote: ({ commit }, e) => {
     commit('EDIT_NOTE', e.target.value)
   },
+  saveNote: ({ commit }) => {
+    commit('SAVE_NOTE')
+  },
   deleteNote: ({ commit }) => {
     commit('DELETE_NOTE')
   },
