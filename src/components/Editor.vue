@@ -14,7 +14,6 @@
       class="form-control note-raw-text">
     </textarea>
     <div class="note-render-html" v-html="activeNoteRender"></div>
-    <div class="note-blank-mask" v-if="!activeNoteID"></div>
   </div>
 </template>
 

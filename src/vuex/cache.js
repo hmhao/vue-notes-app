@@ -19,11 +19,14 @@ class Cache {
       data = id
       id = data.id
     }
-    this[id] = JSON.parse(JSON.stringify(data))
+    if (id) {
+      this[id] = JSON.parse(JSON.stringify(data))
+    }
   }
 
   haveChange (data) {
     let cache = this[data.id]
+    if (!cache) return true
     for (let key in data) {
       if (cache[key] !== data[key]) {
         return true

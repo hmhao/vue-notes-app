@@ -12,12 +12,13 @@ body {
 }
 
 #toolbar {
-  float: left;
+  position: absolute;
   width: 80px;
   height: 100%;
   background-color: #30414D;
   color: #767676;
   padding: 35px 25px 25px 25px;
+  z-index: 11;
 }
 
 #toolbar i {
@@ -32,7 +33,7 @@ body {
   opacity: 1;
 }
 
-.starred {
+.listed, .starred {
   color: #F7AE4F;
 }
 
@@ -49,12 +50,19 @@ body {
 }
 
 #notes-list {
-  float: left;
+  position: absolute;
+  top: 0;
+  left: 80px;
   width: 300px;
   height: 100%;
   background-color: #F5F5F5;
-  font-family: 'Raleway', sans-serif;
   font-weight: 400;
+  z-index: 10;
+  transition: all .5s linear;
+}
+
+.notes-list-enter, .notes-list-leave-to {
+  transform: translateX(-300px);
 }
 
 #list-header {
@@ -87,10 +95,22 @@ body {
   font-size: 15px;
 }
 
-#note-editor {
+#note-tab {
   height: 100%;
   margin-left: 380px;
   position: relative;
+  border-left: 1px solid #ddd;
+  transition: all .5s linear;
+}
+
+.note-tab-expand {
+  width: calc(100% - 80px);
+  transform: translateX(-300px);
+}
+
+.note-tab-collapse {
+  width: calc(100% - 380px);
+  transform: translateX(0px);
 }
 
 #note-editor .input-title {
@@ -116,10 +136,96 @@ body {
   overflow: scroll;
 }
 
-#note-editor .note-blank-mask {
+#note-editor .note-timeline-mask {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: #fff;
+}
+
+.timeline dl {
+  position: relative;
+  top: 0;
+  padding-top: 20px;
+  margin: 0
+}
+
+.timeline dl:before {
+  position: absolute;
+  top: 20px;
+  bottom: 0;
+  left: 100px;
+  z-index: 100;
+  width: 2px;
+  margin-left: -1px;
+  content: '';
+  background-color: #ccd1d9
+}
+
+.timeline dl dt {
+  position: relative;
+  z-index: 200;
+  width: 80px;
+  padding: 3px 5px;
+  margin: 0 0 20px 60px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  background-color: #aab2bd;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px
+}
+
+.timeline dl dd {
+  position: relative;
+  z-index: 200;
+  height: 50px;
+}
+
+.timeline dl dd .circ {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  z-index: 200;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  background-color: #aab2bd;
+  border: 4px solid #f5f7fa;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%
+}
+
+.timeline dl dd .time {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 100px;
+  padding-right: 20px;
+  color: #aab2bd;
+  text-align: right;
+}
+
+.timeline dl dd .title {
+  position: absolute;
+  top: -4px;
+  padding: 5px 10px;
+  margin-left: 140px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  background-color: #fff;
+}
+
+.timeline dl dd .title:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e044";
+  position: relative;
+  top: 2px;
+  padding-right: 5px;
 }

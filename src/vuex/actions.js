@@ -14,9 +14,14 @@ const actions = {
   deleteNote: ({ commit }) => {
     commit('DELETE_NOTE')
   },
-  updateActiveNote: ({ commit }, note) => commit('SET_ACTIVE_NOTE', note),
+  updateActiveNote: ({ commit }, note) => {
+    commit('SET_ACTIVE_NOTE', note)
+  },
   toggleFavorite: ({ commit }) => {
     commit('TOGGLE_FAVORITE')
+  },
+  toggleNotesList: ({ commit }) => {
+    commit('TOGGLE_NOTESLIST')
   }
 }
 
