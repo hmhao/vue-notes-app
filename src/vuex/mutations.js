@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import marked from 'marked'
 import Cache from './cache'
 import utils from './utils'
@@ -14,8 +15,8 @@ const mutations = {
     let now = Date.now()
     const newNote = { // 新建一个对象并初始化属性
       id: ++$lfConfig[$lfConfig.ID_KEY] + '',
-      title: 'New Caption',
-      text: 'New Note',
+      title: '',
+      text: '',
       favorite: false,
       createtime: now,
       updatetime: now,
@@ -30,6 +31,7 @@ const mutations = {
       console.log(err)
     }).then(function () {
       mutations.SAVE_NOTE(state)
+      mutations.RENDER_NOTE(state)
     })
   },
 
@@ -44,7 +46,7 @@ const mutations = {
   },
 
   RENDER_NOTE (state) { // 渲染笔记
-    state.activeNote.renderHtml = marked(state.activeNote.text || '')
+    Vue.set(state.activeNote, 'renderHtml', marked(state.activeNote.text || ''))
   },
 
   SAVE_NOTE (state) { // 保存当前笔记
@@ -92,8 +94,14 @@ const mutations = {
 
   DELETE_NOTE (state) { // 删掉当前笔记
     let index = state.notes.indexOf(state.activeNote)
-    state.notes.splice(index, 1)
-    state.activeNote = state.notes[0] || {}
+    let note = state.notes.splice(index, 1)[0]
+    state.$lf.removeItem(note.id).then(function () {
+      console.log('DELETE_NOTE')
+    }).catch(function (err) {
+      console.log(err)
+    })
+    note.isdelete = true
+    state.activeNote = state.notes[Math.max(0, index - 1)] || {}
   },
 
   TOGGLE_FAVORITE (state) { // 收藏/取消收藏当前笔记

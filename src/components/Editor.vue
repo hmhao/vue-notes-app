@@ -4,6 +4,7 @@
       :value="note.title"
       @input="editTitle"
       @blur="saveNote"
+      placeholder="无标题" 
       type="text" class="form-control note-input-title">
     <textarea
       :value="note.text"
