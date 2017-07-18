@@ -55,16 +55,6 @@ export default {
     }
   },
   // 映射 this.updateActiveNote() 为 this.$store.dispatch('SET_ACTIVE_NOTE')
-  methods: mapActions(['updateActiveNote']),
-  // 自定义过滤器
-  filters: {
-    truncate: function (value, maxlen = 20) {
-      let v = value.trim()
-      if (v.length > maxlen) {
-        v = v.substring(0, maxlen) + '...'
-      }
-      return v
-    }
-  }
+  methods: mapActions(['updateActiveNote'])
 }
 </script>

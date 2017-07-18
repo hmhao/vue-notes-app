@@ -1,27 +1,37 @@
 <template>
   <div id="note-editor">
     <input 
-      :value="activeNoteTitle"
+      :value="note.title"
       @input="editTitle"
       @blur="saveNote"
-      type="text" class="form-control input-title">
+      type="text" class="form-control note-input-title">
     <textarea
-      :value="activeNoteText"
+      :value="note.text"
       @input="editNote"
       @blur="saveNote"
       @keydown.ctrl.83.prevent.stop=""
       @keyup.ctrl.83.prevent.stop="saveNote"
       class="form-control note-raw-text">
     </textarea>
-    <div class="note-render-html" v-html="activeNoteRender"></div>
+    <div class="note-render-html" v-html="note.renderHtml"></div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
-  computed: mapGetters(['activeNoteID', 'activeNoteTitle', 'activeNoteText', 'activeNoteRender']),
+  props: {
+    note: {
+      type: Object,
+      required: true,
+      default: {
+        title: '',
+        text: '',
+        renderHtml: ''
+      }
+    }
+  },
   // 映射 this.editNote() 为 this.$store.dispatch('EDIT_NOTE')
   methods: mapActions(['editTitle', 'editNote', 'saveNote'])
 }

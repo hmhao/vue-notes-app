@@ -26,7 +26,6 @@ const state = {
   $lfConfig: lfConfig, // 离线数据库配置
   notes: [], // 笔记列表包含了 NodesList 组件要渲染的 notes 对象
   activeNote: {}, // 当前笔记则包含当前选中的笔记对象，多个组件都需要这个对象
-  renderHtml: '',
   showNotesList: true
 }
 

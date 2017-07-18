@@ -3,8 +3,8 @@
     <div class="tab-header">
       <ul class="nav nav-tabs" style="height: 42px;">
         <li v-for="(tab, index) in tabs" :class="{active: active == index}">
-          <a @click="active = index" href="javascript:void(0)">
-            {{tab.title}}
+          <a @click="active = index" href="javascript:void(0)" :title="tab.title">
+            {{tab.title | truncate(5)}}
             <a v-if="index > 0" @click.stop="close(tab)" href="javascript:void(0)">
               <i class="glyphicon glyphicon-remove"></i>
             </a>
@@ -16,7 +16,7 @@
       <div v-for="(tab, index) in tabs"
           :class="[active == index ? 'in active' : '']"
           class="tab-pane fade">
-        <editor v-if="index > 0"></editor>
+        <editor v-if="index > 0" :note="tab"></editor>
         <timeline v-else></timeline>
       </div>
     </div>
@@ -67,7 +67,6 @@ export default {
       })
     }
   },
-
   watch: {
     active (index, oldIndex) {
       if (this.tabs[index] !== this.activeNote) {
