@@ -1,3 +1,5 @@
+const dbyte = /[^\x00-\xff]/g
+
 export default {
   install (Vue) {
     /**
@@ -8,11 +10,16 @@ export default {
      *
      */
     Vue.filter('truncate', function (value, maxlen = 20, clamp = '...') {
-      let v = value.trim()
-      if (v.length > maxlen) {
-        v = v.substring(0, maxlen) + clamp
+      if (value.replace(dbyte, 'mm').length <= maxlen) {
+        return value
       }
-      return v
+      let m = Math.floor(maxlen / 2)
+      for (let i = m, len = value.length; i < len; i++) {
+        if (value.substr(0, i).replace(dbyte, 'mm').length >= maxlen) {
+          return value.substr(0, i) + clamp
+        }
+      }
+      return value
     })
   }
 }

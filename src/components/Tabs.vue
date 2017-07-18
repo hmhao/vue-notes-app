@@ -4,7 +4,7 @@
       <ul class="nav nav-tabs" style="height: 42px;">
         <li v-for="(tab, index) in tabs" :class="{active: active == index}">
           <a @click="active = index" href="javascript:void(0)" :title="tab.title || '无标题'">
-            {{(tab.title  || '无标题') | truncate(5)}}
+            {{(tab.title  || '无标题') | truncate(8)}}
             <a v-if="index > 0" @click.stop="close(tab)" href="javascript:void(0)">
               <i class="glyphicon glyphicon-remove"></i>
             </a>

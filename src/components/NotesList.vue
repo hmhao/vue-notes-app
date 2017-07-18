@@ -17,11 +17,14 @@
     <div class="container">
       <div class="list-group">
         <a v-for="note in filteredNotes"
-          class="list-group-item" href="#"
+          class="list-group-item" href="javascript:void(0)"
           @click="updateActiveNote(note)">
           <h4 class="list-group-item-heading">
-            {{note.title | truncate}}
+            <i class="glyphicon glyphicon-list-alt"></i>
+            {{note.title | truncate(35)}}
           </h4>
+          <span>{{note.createtime | date('yyyy/M/d')}}</span>
+          <p>{{note.text | truncate(70)}}</p>
         </a>
       </div>
     </div>

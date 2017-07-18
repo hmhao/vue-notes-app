@@ -25,7 +25,7 @@ export default {
       let dateFilter = Vue.filter('date')
       let mediumDate
       this.notes.forEach(function (note) {
-        mediumDate = dateFilter(note.updatetime, 'yyyy/MM/dd')
+        mediumDate = dateFilter(note.updatetime, 'yyyy.MM.dd')
         if (!group[mediumDate]) {
           group[mediumDate] = []
         }
