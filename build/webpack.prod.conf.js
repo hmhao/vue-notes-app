@@ -33,7 +33,6 @@ module.exports = merge(baseWebpackConfig, {
         warnings: false
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     // extract css into its own file
     new ExtractTextPlugin(path.join(config.build.assetsSubDirectory, '[name].css')),
     // generate dist index.html with correct asset hash for caching.
