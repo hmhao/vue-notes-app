@@ -1,4 +1,5 @@
 var path = require('path')
+var webpack = require('webpack')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
@@ -12,11 +13,8 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    path: config.build.outputRoot,
+    filename: '[name].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -63,5 +61,20 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ExternalsPlugin('commonjs2', [
+      'desktop-capturer',
+      'electron',
+      'ipc',
+      'ipc-renderer',
+      'native-image',
+      'remote',
+      'web-frame',
+      'clipboard',
+      'crash-reporter',
+      'screen',
+      'shell'
+    ])
+  ]
 }

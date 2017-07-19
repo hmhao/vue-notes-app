@@ -1,38 +1,56 @@
-// see http://vuejs-templates.github.io/webpack for documentation.
+/**
+ * General configuration for build and release scripts.
+ *
+ * This file as adapted from http://vuejs-templates.github.io/webpack.
+ * Some options were removed or changed to simplify things and/or
+ * make them more applicable to Electron apps.
+ */
 var path = require('path')
 
 module.exports = {
   build: {
-    env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    // The directory which will contained packaged releases and installers
+    // for various operation systems.
+    releasesRoot: path.resolve(__dirname, '..', 'releases'),
+
+    // The target directory for your app's compiled assets. Must be an absolute path.
+    // This is the directory which will contain a runnable electron app.
+    outputRoot: path.resolve(__dirname, '..', 'dist'),
+
+    // Nest webpack-generated assets under this directory in `assetsRoot`.
+    // This applies to all non-JavaScript assets processed by webpack.
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    productionSourceMap: true,
-    // Gzip off by default as many popular static hosts such as
-    // Surge or Netlify already gzip all static assets for you.
-    // Before setting to `true`, make sure to:
-    // npm install --save-dev compression-webpack-plugin
-    productionGzip: false,
-    productionGzipExtensions: ['js', 'css'],
-    // Run the build command with an extra argument to
-    // View the bundle analyzer report after build finishes:
-    // `npm run build --report`
-    // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
+
+    // Whether to generate source maps for production builds.
+    productionSourceMap: true
+  },
+  release: {
+    // The Electron version to use for packaged releases. If blank, it defaults
+    // to the version of electron-prebuilt in your development package.json.
+    //
+    // electronVersion: '0.37.2',
+
+    // The target platforms for packaged releases. For options, see
+    // https://github.com/electron-userland/electron-packager
+    platform: 'all'
   },
   dev: {
-    env: require('./dev.env'),
+    // Dev server port.
     port: 8080,
-    autoOpenBrowser: true,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    proxyTable: {},
-    // CSS Sourcemaps off by default because relative paths are "buggy"
-    // with this option, according to the CSS-Loader README
-    // (https://github.com/webpack/css-loader#sourcemaps)
-    // In our experience, they generally work as expected,
-    // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    // Proxy requests to different backend during development.
+    // https://github.com/chimurai/http-proxy-middleware
+    proxyTable: {
+      // '/api': {
+      //   target: 'http://jsonplaceholder.typicode.com',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // }
+    },
+    cssSourceMap: false,
+    // Whether or not open another Electron window with vue-devtools.
+    vueDevTools: true
   }
 }

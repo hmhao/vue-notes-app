@@ -1,0 +1,10 @@
+{
+  "name": "electron-vue-notes-app",
+  "productName": "Electron Vue Notes App",
+  "version": "0.1.0",
+  "description": "An Electron Vue.js project",
+  "author": "hmh <215795583@qq.com>",
+  "main": "background.js",
+  "dependencies": {
+  }
+}
