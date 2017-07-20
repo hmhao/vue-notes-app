@@ -1,6 +1,8 @@
 # vue-notes-app
 
-> A Vue.js project
+> A Vue.js project use Vuex, [Localforage](https://github.com/localForage/localForage) and [Marked](https://github.com/chjj/marked) to build a managed offline markdown notes app
+
+The [electron branch](https://github.com/hmhao/vue-notes-app/tree/electron) use [Electron](https://github.com/electron/electron) to build cross platform desktop apps
 
 ## Build Setup
 
