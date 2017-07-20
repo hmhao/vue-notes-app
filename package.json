@@ -1,7 +1,7 @@
 {
   "name": "vue-notes-app",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Vue.js project use Vuex, [Localforage](https://github.com/localForage/localForage) and [Marked](https://github.com/chjj/marked) to build a managed offline markdown notes app",
   "author": "hmh <215795583@qq.com>",
   "private": true,
   "scripts": {
