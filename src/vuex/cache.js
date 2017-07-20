@@ -20,7 +20,7 @@ class Cache {
       id = data.id
     }
     if (id) {
-      this[id] = JSON.parse(JSON.stringify(data))
+      this[id] = data
     }
   }
 
