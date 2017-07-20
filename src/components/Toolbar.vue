@@ -1,6 +1,6 @@
 <template>
   <div id="toolbar">
-    <i class="logoicon"><img src="/static/img/logo.png"></i>
+    <i class="logoicon"><img src="static/img/logo.png"></i>
     <i @click="toggleNotesList" 
       class="glyphicon glyphicon-th-list"
       :class="{listed: showNotesList}"></i>

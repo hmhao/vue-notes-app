@@ -76,5 +76,9 @@ module.exports = {
       'screen',
       'shell'
     ])
-  ]
+  ],
+  node: {
+    __dirname: process.env.NODE_ENV !== 'production',
+    __filename: process.env.NODE_ENV !== 'production'
+  }
 }

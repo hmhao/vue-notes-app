@@ -18,7 +18,7 @@ app.on('ready', () => {
   // hot reload is enabled, otherwise load the local file.
   const mainURL = process.env.HOT
     ? `http://localhost:${process.env.PORT}/index.html`
-    : 'file://' + path.join(__dirname, '..', 'index.html')
+    : `file://${__dirname}/index.html`
 
   mainWindow.loadURL(mainURL)
 
