@@ -18,9 +18,8 @@ const mutations = {
       title: '',
       text: '',
       favorite: false,
-      createtime: now,
-      updatetime: now,
-      renderHtml: ''
+      createtime: '' + now,
+      updatetime: '' + now
     }
     state.notes.push(newNote) // push 到笔记列表里去
     state.activeNote = newNote // 把新建的这条笔记设为当前笔记
@@ -54,7 +53,7 @@ const mutations = {
     let autoSave = state.$lfConfig.autoSave
     let note = utils.omit(state.activeNote, 'renderHtml')
     if (note.id && cache.haveChange(note)) { // 当前编辑笔记及笔记内容发生改变时
-      note.updatetime = Date.now()
+      state.activeNote.updatetime = note.updatetime = '' + Date.now()
       state.$lf.setItem(note.id, note).then(function (value) {
         console.log('SAVE_NOTE')
         cache.set(note)
@@ -115,7 +114,7 @@ const mutations = {
 
   SET_ACTIVE_NOTE (state, note) { // 把选中的笔记设置为「当前笔记」
     mutations.SAVE_NOTE(state) // 先保存后切换
-    cache.set(note) // 缓存当前编辑的笔记
+    cache.set(utils.omit(note, 'renderHtml')) // 缓存当前编辑的笔记
     state.activeNote = note
     mutations.RENDER_NOTE(state) // 然后渲染
   }

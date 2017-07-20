@@ -21,7 +21,7 @@
           @click="updateActiveNote(note)">
           <h4 class="list-group-item-heading">
             <i class="glyphicon glyphicon-list-alt"></i>
-            {{note.title | truncate(35)}}
+            {{(note.title || '无标题') | truncate(35)}}
           </h4>
           <span>{{note.createtime | date('yyyy/M/d')}}</span>
           <p>{{note.text | truncate(70)}}</p>
